@@ -17,7 +17,7 @@ app.use("/api/games", gameRoutes)
 app.use("/api/tags", tagRoutes)
 
 app.get("/", (req, res) => {
-    res.send("Hallow!:3");
+    res.send("Hellaow!:3");
 });
 
 app.listen(process.env.PORT);
