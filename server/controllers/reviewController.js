@@ -1,13 +1,13 @@
 const Review = require("../models/ReviewSchema.js");
 
 const reviewController = {
-    createReview: ((req, res) => {
+    createReview: (async (req, res) => {
         const { gameid } = req.params;
         const { comment, recommended, stars } = req.body;
         const email = req.user.email;
         let userId = req.user.id;
 
-        const review = new Review({
+        const review = await Review.create({
             user: userId,
             game: gameid,
             comment: comment,
