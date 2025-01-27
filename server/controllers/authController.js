@@ -1,10 +1,10 @@
 const User = require("../models/UserSchema.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const createJwt = require("../utils/createJwt.js")
-const createCookie = require("../utils/createCookie.js")
+const createJwt = require("../utils/createJwt.js");
+const createCookie = require("../utils/createCookie.js");
 
-const saltRounds = parseInt(process.env.SALTROUNDS, 10)
+const saltRounds = parseInt(process.env.SALTROUNDS, 10);
 
 const authController = {
     login:( async (req, res) => {
@@ -20,14 +20,14 @@ const authController = {
             createCookie(res, jwtToken);
             res.status(202).send({msg: "User found!", user: user});
         } else {
-            res.status(404).send({msg: "User not found"})
-        }
+            res.status(404).send({msg: "User not found"});
+        };
     }),
     register: ((req, res) => {
         const {email, password, repeatPassword} = req.body;
         const role = "user";
         if(password === repeatPassword) {
-            bcrypt.hash(password, saltRounds, function(err, hash) {
+            bcrypt.hash(password, saltRounds, async function(err, hash) {
                 if(err) console.log(err, "error");
                     const user = new User({
                         email: email,
@@ -36,12 +36,11 @@ const authController = {
                 });
                 user.save();
                 const jwtToken = createJwt(email, role);
-                createCookie(res, jwtToken);
+                await createCookie(res, jwtToken);
                 res.status(201).send({msg: "Sucsessfully signed up", user:user});
             });
         } else {
-            res.send({msg: "Please check your signup"})
-            console.log(password, repeatPassword, email)
+            res.send({msg: "Please check your signup", password: password, repeatPassword: repeatPassword, email: email });
         }
     })
 };

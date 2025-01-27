@@ -6,10 +6,10 @@ const gameController = {
 
         if (games.length > 0) {
 
-            res.status(200).send({msg: "games found", games: games})
+            res.status(200).send({msg: "games found", games: games});
         } else {
-            res.status(404).send({msg: "games not found"})
-        }
+            res.status(404).send({msg: "games not found"});
+        };
 
 
     }),
@@ -31,8 +31,8 @@ const gameController = {
         if (result._id) {
             res.status(201).send({msg: "successfully created game"});
         } else {
-            res.status(500).send({msg: "error creating game"})
-        }
+            res.status(500).send({msg: "error creating game"});
+        };
     }),
     getGame: (async (req, res) => {
         const { id } = req.params;
@@ -49,19 +49,17 @@ const gameController = {
         try {
             const game = await Game.findByIdAndUpdate(id, updateContent);
 
-            res.status(200).send({msg: "Game updated successfully"});
+            res.status(200).send({ msg: "Game updated successfully", game: game });
         } catch (error) {
             console.error(error);
-        }
-        
+        };
     }),
     deleteGame: (async (req, res ) => {
         const { id } = req.params;
 
         const game = await Game.findByIdAndDelete(id);
 
-        res.status(200).send({msg: "Game deleted"});
-        
+        res.status(200).send({ msg: "Game deleted", game: game });
     })
 };
 
