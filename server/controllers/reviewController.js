@@ -3,6 +3,7 @@ const Game = require("../models/GameSchema.js");
 
 const reviewController = {
     createReview: (async (req, res) => {
+        console.log(req.body)
         const { gameId } = req.params;
         const { comment, recommended, stars } = req.body;
         let userId = req.user.id;

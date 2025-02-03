@@ -32,7 +32,7 @@ const authController = {
             const role = "user";
             if(password === repeatPassword) {
                 bcrypt.hash(password, saltRounds, async function(err, hash) {
-                    if(err) console.log(err, "error");
+                    if(err) console.error(err, "error");
                         const user = new User({
                             email: email,
                             password: hash,
@@ -41,7 +41,7 @@ const authController = {
                     user.save();
                     const jwtToken = createJwt(email, role);
                     await createCookie(res, jwtToken);
-                    res.status(201).send({msg: "Sucsessfully signed up", user:user});
+                    res.status(201).send({msg: "Successfully signed up", user:user});
                 });
             } else {
                 res.send({msg: "Please check your signup", password: password, repeatPassword: repeatPassword, email: email });
@@ -50,6 +50,15 @@ const authController = {
             console.error(error);
             res.status(500).send({ msg: "Internal server error"});
         };
+    }),
+    user: (async (req, res) => {
+        let email = req.user.email;
+        try {
+            const user = await User.findOne({email})
+        } catch (error) {
+            console.error(error)
+            res.status(500).send({ msg: "Bad Request", error: error })
+        }
     })
 };
 

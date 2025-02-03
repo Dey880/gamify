@@ -15,6 +15,7 @@ const tagController = {
         };
     }),
     createTag: (async (req, res) => {
+        console.log(req.body)
         const {name} = req.body;
         try {
             const tag = new Tag({name});
@@ -44,6 +45,7 @@ const tagController = {
         };
     }),
     updateTag: (async (req, res) => {
+        console.log(req.body)
         const { id } = req.params;
         const updateContent = req.body;
         try {

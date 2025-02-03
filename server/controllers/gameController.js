@@ -15,6 +15,7 @@ const gameController = {
         };
     }),
     createGame: (async (req, res) => {
+        console.log(req.body)
         const {title, price, publisher, developer, releaseDate, status, description, shortDescription} = req.body;
         try {
             const game = new Game({
@@ -49,6 +50,7 @@ const gameController = {
         };
     }),
     editGame: (async (req, res) => {
+        console.log(req.body)
         const { id } = req.params;
         const updateContent = req.body;
         try {
