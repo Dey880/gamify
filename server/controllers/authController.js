@@ -44,7 +44,7 @@ const authController = {
                     res.status(201).send({msg: "Successfully signed up", user:user});
                 });
             } else {
-                res.send({msg: "Please check your signup", password: password, repeatPassword: repeatPassword, email: email });
+                res.status(400).send({msg: "Please check your signup", password: password, repeatPassword: repeatPassword, email: email });
             }
         } catch (error) {
             console.error(error);
