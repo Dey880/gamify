@@ -1,4 +1,4 @@
-import "../css/Footer.css"
+import "../css/components/Footer.css"
 
 export default function Footer() {
     return(
@@ -15,7 +15,7 @@ export default function Footer() {
             </div>
             <div>
                 <p><a href="/">Contact us</a></p>
-                <p><a href="/">See our new games</a></p>
+                <p><a href="/games">See our new games</a></p>
                 <p><a href="/">Join our newsletter</a></p>
             </div>
         </div>

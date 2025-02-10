@@ -1,4 +1,4 @@
-import "../css/Form.css"
+import "../css/components/Form.css"
 import { useState, useContext } from "react";
 import axios from "axios"
 import { AuthContext } from "../auth/AuthContext";

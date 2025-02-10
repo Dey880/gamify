@@ -16,17 +16,19 @@ const gameController = {
     }),
     createGame: (async (req, res) => {
         console.log(req.body)
-        const {title, price, publisher, developer, releaseDate, status, description, shortDescription} = req.body;
+        const {title, price, publisher, developer, releaseDate, status, description, shortDescription, discount, img} = req.body;
         try {
             const game = new Game({
                 title,
-                price,
+                shortDescription,
+                description,
                 publisher,
                 developer,
                 releaseDate,
+                price,
+                discount,
                 status,
-                description,
-                shortDescription,
+                img,
             });
             let result = await game.save();
             if (result._id) {
