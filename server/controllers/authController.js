@@ -12,6 +12,7 @@ const authController = {
         try {
             const user = await User.findOne({email: email});
             const role = "user";
+            console.log(user)
             let hashedPassword = user.password;
             const isPassword = await bcrypt.compare(password, hashedPassword);
             if(isPassword) {
