@@ -11,8 +11,10 @@ const authController = {
         const { email, password } = req.body;
         try {
             const user = await User.findOne({email: email});
+            if (!user) {
+                return res.status(404).send({ msg: "User not found" });
+            }    
             const role = "user";
-            console.log(user)
             let hashedPassword = user.password;
             const isPassword = await bcrypt.compare(password, hashedPassword);
             if(isPassword) {

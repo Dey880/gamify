@@ -25,7 +25,14 @@ export default function Login() {
                     window.location.replace("/profile");
                 }
             }, 1000);
-        });        
+        })
+        .catch((error) => {
+            if (error.response) {
+                setMsg(error.response.data.msg);
+            } else {
+                setMsg("An error occurred. Please try again later.");
+            }
+        });
         
     }
 
