@@ -1,6 +1,5 @@
 const User = require("../models/UserSchema.js");
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 const createJwt = require("../utils/createJwt.js");
 const createCookie = require("../utils/createCookie.js");
 
@@ -57,7 +56,12 @@ const authController = {
     user: (async (req, res) => {
         let email = req.user.email;
         try {
-            const user = await User.findOne({email})
+            const user = await User.findOne({email});
+            if (user) {
+                res.status(200).send({ msg: "User found", user: user });
+            } else {
+                res.status(404).send({ msg: "User not found" });
+            }
         } catch (error) {
             console.error(error)
             res.status(500).send({ msg: "Bad Request", error: error })
